@@ -1,1 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP5 - Training Programs to Disseminate Telemedicine Across Asia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #EF5350;
+            --secondary: #FF7043;
+            --body: #F8F3F0;
+            --text: #1D1D1B;
+            --secondary-dark: #9C3A26;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Overview Section */
+        .overview {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .overview .section-title {
+            color: var(--white);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* Countries Grid */
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .country-card {
+            background: linear-gradient(135deg, var(--body), var(--white));
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(239, 83, 80, 0.15);
+        }
+
+        .country-type {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .country-list {
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        /* Activities List */
+        .activities-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .activity-item {
+            background: var(--body);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Challenges & Outcomes */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .challenge-item, .outcome-item {
+            background: var(--body);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-item {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .outcome-item {
+            border-left: 4px solid #27ae60;
+        }
+
+        .challenge-item:hover, .outcome-item:hover {
+            transform: translateX(5px);
+        }
+
+        .item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-item .item-title {
+            color: #e74c3c;
+        }
+
+        .outcome-item .item-title {
+            color: #27ae60;
+        }
+
+        /* SDGs */
+        .sdgs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .sdg-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .logos {
+                gap: 1.5rem;
+            }
+
+            .logo {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logos {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .countries-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation on scroll */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logos">
+                    <div class="logo">
+                        <img src="images/logos/tein-logo.png" alt="TEIN CC Logo">
+                    </div>
+                    <div class="logo">
+                        <img src="images/logos/asia-connect-logo.png" alt="Asia Connect Logo">
+                    </div>
+                    <div class="logo">
+                        <img src="images/logos/eu-logo.png" alt="European Union Logo">
+                    </div>
+                </div>
+                <h1>Training Programs to Disseminate Telemedicine Across Asia</h1>
+                <p class="subtitle">WP5 • 1st Call • Building Sustainable Healthcare Capacity</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#countries">Countries</a></li>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#outcomes">Outcomes</a></li>
+                <li><a href="#challenges">Challenges</a></li>
+                <li><a href="#future">Future</a></li>
+                <li><a href="#sdgs">SDGs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section overview">
+                <h2 class="section-title">Project Overview</h2>
+                <div class="section-content">
+                    <p>Led by TEMDEC at Kyushu University Hospital, this transformative project built sustainable telemedicine capacity across developing countries through systematic training of hospital engineers and collaboration with research and education networks (RENs).</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-label">Hospitals Connected</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Countries Involved</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Participant Satisfaction</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">SDGs Addressed</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="countries" class="section">
+                <h2 class="section-title">Participating & Beneficiary Countries</h2>
+                <div class="countries-grid">
+                    <div class="country-card">
+                        <div class="country-type">Participating Countries</div>
+                        <div class="country-list">Japan, Philippines, Vietnam, Indonesia, Malaysia</div>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-type">Beneficiary Countries</div>
+                        <div class="country-list">Myanmar, Cambodia, Laos, Bhutan, Nepal, Bangladesh, Mongolia</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="objectives" class="section">
+                <h2 class="section-title">Project Objectives</h2>
+                <div class="section-content">
+                    <p>To build sustainable telemedicine capacity across Asia by training hospital and REN engineers through workshops and Train-the-Trainer programs. Our comprehensive approach focuses on:</p>
+                    <ul style="margin: 1.5rem 0; padding-left: 2rem;">
+                        <li>Empowering local trainers for long-term sustainability</li>
+                        <li>Expanding hospital participation in telemedicine networks</li>
+                        <li>Enhancing REN-hospital collaboration</li>
+                        <li>Promoting reusable training content</li>
+                        <li>Fostering cross-border medical-technical exchange</li>
+                        <li>Standardizing system practices</li>
+                        <li>Supporting national policy integration</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="activities" class="section">
+                <h2 class="section-title">Key Activities Conducted</h2>
+                <ul class="activities-list">
+                    <li class="activity-item">
+                        <div class="activity-title">Train-the-Trainer Program (TEMDEC, Japan)</div>
+                        <p>1-month intensive hands-on training on DVTS, H.323, Vidyo systems, and medical equipment. Trainees gained clinical and technical experience and returned to lead national efforts.</p>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-title">APAN On-the-Job Training</div>
+                        <p>Engineers participated in real-time support of medical sessions during APAN 44 & 45, learning system setup, troubleshooting, and network integration.</p>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-title">Domestic Workshops</div>
+                        <p>Localized training in Philippines (16 participants, 10+ hospitals), Indonesia (40+ participants, 22 institutions), with Vietnam expansion planned.</p>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-title">Asia Telemedicine Symposium (ATS)</div>
+                        <p>Annual gathering of engineers and doctors to review progress, discuss technologies, and address technical and clinical gaps.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="outcomes" class="section">
+                <h2 class="section-title">Key Outcomes & Challenges</h2>
+                <div class="two-column">
+                    <div>
+                        <h3 style="color: #27ae60; margin-bottom: 1rem;">Achievements</h3>
+                        <div class="outcome-item">
+                            <div class="item-title">Expanded Hospital Participation</div>
+                            <p>Enabled telemedicine in 30+ hospitals across Asia, increasing access to remote medical education and collaborative case sharing.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <div class="item-title">Trained Local Leaders</div>
+                            <p>Developed national-level trainers who now lead telemedicine deployment and train other engineers.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <div class="item-title">Infrastructure Readiness</div>
+                            <p>Hospitals acquired system setup, testing, and troubleshooting capabilities using DVTS, H.323, and Vidyo platforms.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <div class="item-title">Cross-Sector Collaboration</div>
+                            <p>Strengthened REN-hospital links, aligning network engineers and medical staff for efficient implementation.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: #e74c3c; margin-bottom: 1rem;">Challenges</h3>
+                        <div class="challenge-item">
+                            <div class="item-title">Rural Staff Shortage</div>
+                            <p>Remote hospitals often lacked engineers, delaying infrastructure adoption and requiring repeated training efforts.</p>
+                        </div>
+                        <div class="challenge-item">
+                            <div class="item-title">Unstable REN Coverage</div>
+                            <p>Weak network connectivity in some areas hindered real-time sessions and reduced training participation.</p>
+                        </div>
+                        <div class="challenge-item">
+                            <div class="item-title">Outdated Equipment</div>
+                            <p>Many hospitals used incompatible A/V systems, affecting session quality and requiring replacement investment.</p>
+                        </div>
+                        <div class="challenge-item">
+                            <div class="item-title">Language Barriers</div>
+                            <p>Multinational sessions faced communication challenges, reducing effective collaboration during workshops.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="future" class="section">
+                <h2 class="section-title">Future Directions</h2>
+                <div class="section-content">
+                    <p>Our roadmap for expanding telemedicine capabilities across the region includes:</p>
+                    <ul style="margin: 1.5rem 0; padding-left: 2rem;">
+                        <li><strong>Geographic Expansion:</strong> Extend training to Bangladesh, Bhutan, Nepal, Afghanistan, and Mongolia</li>
+                        <li><strong>Localized Instruction:</strong> Translate training materials for native-language use</li>
+                        <li><strong>REN Infrastructure Support:</strong> Advocate for improved network access in underserved provinces</li>
+                        <li><strong>Medical Specialization Growth:</strong> Design programs for cardiology, radiology, and infectious disease</li>
+                        <li><strong>Policy Integration:</strong> Promote national-level policies for sustainable telemedicine implementation</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sdgs" class="section">
+                <h2 class="section-title">Relevant Sustainable Development Goals</h2>
+                <div class="sdgs-grid">
+                    <div class="sdg-card">
+                        <strong>SDG 3</strong><br>
+                        Good Health and Well-Being
+                    </div>
+                    <div class="sdg-card">
+                        <strong>SDG 4</strong><br>
+                        Quality Education
+                    </div>
+                    <div class="sdg-card">
+                        <strong>SDG 9</strong><br>
+                        Industry, Innovation and Infrastructure
+                    </div>
+                    <div class="sdg-card">
+                        <strong>SDG 17</strong><br>
+                        Partnerships for the Goals
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 WP5 Training Programs to Disseminate Telemedicine Across Asia</p>
+            <p>Led by TEMDEC at Kyushu University Hospital • Funded by TEIN Cooperation Center</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
